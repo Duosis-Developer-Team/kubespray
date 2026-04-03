@@ -1,0 +1,11 @@
+---
+- name: "Install required collections"
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: "community.general koleksiyonunu yükle"
+      command: ansible-galaxy collection install community.general ansible.posix kubernetes.core
+      changed_when: true
+
+- name: "Import Kubespray cluster playbook"
+  import_playbook: cluster.yml
