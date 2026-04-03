@@ -1,0 +1,60 @@
+---
+# ============================================================
+#  group_vars/k8s_cluster/k8s-cluster.yml
+#  Ortam: apm-test cluster / blt.vc
+# ============================================================
+
+## Kubernetes versiyonu
+kube_version: v1.31.4
+
+## API Endpoint — VIP DNS kaydı
+kubeadm_control_plane_endpoint: "apmtest.blt.vc:6443"
+
+## SSL SAN'larına ekle
+supplementary_addresses_in_ssl_keys:
+  - apmtest.blt.vc
+  - 10.134.16.69
+  - 10.134.16.63
+  - 10.134.16.64
+  - 10.134.16.65
+
+## Network Plugin
+kube_network_plugin: calico
+
+## Pod ve Service CIDR
+kube_pods_subnet: 10.233.64.0/18
+kube_service_addresses: 10.233.0.0/18
+
+## kube-proxy modu — IPVS (kernel modülleri hazır)
+kube_proxy_mode: ipvs
+
+## Container Runtime
+container_manager: containerd
+
+## Containerd config — LVM mount /var/lib/containerd zaten hazır
+containerd_storage_dir: /var/lib/containerd
+
+## kubeconfig çıktısı
+kubeconfig_localhost: true
+kubectl_localhost: true
+
+## CoreDNS
+dns_mode: coredns
+
+## Metrics server
+metrics_server_enabled: true
+
+## Node yerel DNS cache
+enable_nodelocaldns: true
+
+## Audit log
+kubernetes_audit: false
+
+## Dashboard — şimdilik kapat
+dashboard_enabled: false
+
+## NGINX Ingress — DESTEKLENMIYOR, kapalı
+ingress_nginx_enabled: false
+
+## Metallb — şimdilik kapat (sonra ayarlarız)
+metallb_enabled: false
